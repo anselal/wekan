@@ -3,7 +3,7 @@ Wekan auto-installation script
 
 Tested on Ubuntu Server 14.04.3 LTS but it schould work on all Debian based distributions
 
-This scripts automates the installation process for Wekan v0.90
+This script automates the installation process for Wekan v0.90
 
 It automatically downloads and installs the following packages:
 
@@ -19,3 +19,8 @@ Run as root:
 $ chmod +x autoinstall_wekan.sh
 $ ./autoinstall_wekan.sh
 ```
+
+As a plus, the script configures Wekan as a service which autostarts at boot.
+
+After the installation is complete, you have the option to start the service or to reboot the system.
+
