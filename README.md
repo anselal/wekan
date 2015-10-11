@@ -24,3 +24,8 @@ As a plus, the script configures Wekan as a service which autostarts at boot.
 
 After the installation is complete, you have the option to start the service or to reboot the system.
 
+You can manually start the service as root by typing:
+
+```sh
+$ /etc/init.d/wekan start
+```
