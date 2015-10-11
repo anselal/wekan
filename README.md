@@ -13,6 +13,8 @@ It automatically downloads and installs the following packages:
 * forever (runs NodeJS applications at the background forever)
 * wekan v0.90
 
+## Installation
+
 Run as root:
 
 ```sh
@@ -23,6 +25,8 @@ $ ./autoinstall_wekan.sh
 As a plus, the script configures Wekan as a service which autostarts at boot.
 
 After the installation is complete, you have the option to start the service or to reboot the system.
+
+## Service
 
 You can manually start the service as root by typing:
 
