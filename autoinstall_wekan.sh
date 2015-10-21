@@ -2,7 +2,9 @@
 
 apt-get update && apt-get install -y mongodb-server make g++ gcc build-essential libssl-dev
 
-wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.28.0/install.sh | bash
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash
+# if wget fails, use curl
+# curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash
 
 source ~/.nvm/nvm.sh
 source ~/.profile
@@ -89,7 +91,7 @@ restart() {
 
 status() {
 	echo "Status for $NAME"
-	/usr/local/bin/forever list
+	$NODE_PATH/forever list
 	RETVAL=$?
 }
 

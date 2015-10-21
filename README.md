@@ -16,7 +16,7 @@ It automatically downloads and installs the following packages:
 ## Pre-Configuration
 Before you start the installation, you can edit the script to change some parameters, such as:
 
-* *NODE_VERSION* (default is v0.10.40 which isnrequired for running Wekan v0.90. I suggest **NOT CHANGING IT** since it could break the service)
+* *NODE_VERSION* (default is v0.10.40 which is required for running Wekan v0.90. I suggest **NOT CHANGING IT** since it could break the service)
 * *MONGO_URL* (default is mongodb://127.0.0.1:27017/wekan)
 * *ROOT_URL* (default is http://127.0.0.1)
 * *PORT* (defaults is set to **8080**)
@@ -35,6 +35,10 @@ $ ./autoinstall_wekan.sh
 As a plus, the script configures Wekan as a service which autostarts at boot.
 
 After the installation is complete, you have the option to start the service or to reboot the system.
+
+>In case the script fails fetching **nvm** using **wget**, you can edit the file and
+- comment out line 5, which is the **wget** command for fetching nvm
+- uncomment line 7, which uses **curl** to fetch **nvm**
 
 ## Service
 You can manually start the service as root by typing:
