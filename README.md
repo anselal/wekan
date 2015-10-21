@@ -3,7 +3,7 @@ Wekan auto-installation script
 
 Tested on Ubuntu Server 14.04.3 LTS but it should work on any Debian based distributions.
 
-This scripts automates the installation process for **Wekan v0.90**
+This scripts automates the installation process for **Wekan v0.9.0**
 
 It automatically downloads and installs the following packages:
 
@@ -11,12 +11,12 @@ It automatically downloads and installs the following packages:
 * mongodb-server (NoSQL database)
 * nvm (installs NodeJS v0.10.40)
 * forever (runs NodeJS applications at the background forever)
-* wekan v0.90
+* wekan v0.9.0
 
 ## Pre-Configuration
 Before you start the installation, you can edit the script to change some parameters, such as:
 
-* *NODE_VERSION* (default is v0.10.40 which is required for running Wekan v0.90. I suggest **NOT CHANGING IT** since it could break the service)
+* *NODE_VERSION* (default is v0.10.40 which is required for running Wekan v0.9.0. I suggest **NOT CHANGING IT** since it could break the service)
 * *MONGO_URL* (default is mongodb://127.0.0.1:27017/wekan)
 * *ROOT_URL* (default is http://127.0.0.1)
 * *PORT* (defaults is set to **8080**)
