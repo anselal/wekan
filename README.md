@@ -1,9 +1,9 @@
 # wekan
 Wekan auto-installation script
 
-Tested on Ubuntu Server 14.04.3 LTS but it should work on any Debian based distributions.
+Tested on Ubuntu Server 14.04.3 LTS but it should work on any Debian based distribution.
 
-This scripts automates the installation process for **Wekan v0.9.0**
+This scripts automates the installation process for **[Wekan v0.9.0](https://github.com/wekan/wekan/releases/tag/v0.9)**
 
 It automatically downloads and installs the following packages:
 
@@ -72,3 +72,10 @@ $ update-rc.d -f wekan remove && update-rc.d wekan defaults
 ```
 
 For the changes to take effect you should **restart the service**. I recommend **rebooting your system**, since the previous service could be still running.
+
+## Wekan Virtual Appliance
+
+I have prepared a ready to run, Ubuntu based (Ubuntu 14.04.3 Server - amd64) Virtual Machine with [Wekan](https://github.com/wekan/wekan) preinstalled. All you need is a VirtualBox installation. You can download the appliance from https://selalmaz.xyz/t/wekanvm (~794MB)
+
+* username: wekan
+* password: wekan
