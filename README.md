@@ -75,7 +75,7 @@ For the changes to take effect you should **restart the service**. I recommend *
 
 ## Wekan Virtual Appliance
 
-I have prepared a ready to run, Ubuntu based (Ubuntu 14.04.3 Server - amd64) Virtual Machine with [Wekan](https://github.com/wekan/wekan) preinstalled. All you need is a VirtualBox installation. You can download the appliance from https://selalmaz.xyz/t/wekanvm (~794MB)
+I have prepared a ready to run, Ubuntu based (Ubuntu 14.04.3 Server - amd64) Virtual Machine with [Wekan](https://github.com/wekan/wekan) preinstalled. All you need is a VirtualBox installation. You can download the appliance from https://selalmaz.xyz/t/wekanvm (~678MB)
 
 * username: wekan
 * password: wekan
