@@ -21,9 +21,9 @@ nvm alias default $NODE_VERSION
 
 npm install forever -g
 
-wget https://github.com/wekan/wekan/releases/download/v0.9/wekan-v0.9.0.tar.gz
+wget https://github.com/wekan/wekan/releases/download/v0.10.0-rc1/wekan-v0.10.0-rc1.tar.gz
 rm -rf ~/bundle
-tar xzvf wekan-v0.9.0.tar.gz
+tar xzvf wekan-v0.10.0-rc1.tar.gz
 
 cd bundle/programs/server && npm install
 
