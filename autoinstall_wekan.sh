@@ -1,10 +1,35 @@
 #!/bin/bash
 
-apt-get update && apt-get install -y mongodb-server make g++ gcc build-essential libssl-dev
+if [[ $EUID -ne 0 ]]; then
+   echo ""
+   echo "This script must be run as root" 1>&2
+   echo ""
+   exit 1
+fi
 
-wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash
-# if wget fails, use curl
-# curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash
+which aptitude > /dev/null
+# Use aptitude if it exists
+if [ $? -eq "0" ]; then
+	aptitude update && aptitude install -y mongodb-server make g++ gcc build-essential libssl-dev
+# else us apt-get
+elif [ $? -ne "0" ]; then
+	apt-get update && apt-get install -y mongodb-server make g++ gcc build-essential libssl-dev
+fi
+
+aptitude update && aptitude install -y mongodb-server make g++ gcc build-essential libssl-dev
+
+# wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.30.0/install.sh | bash
+
+# Check if curl exists
+which curl > /dev/null
+# If curl does not exist, install it
+if [ $? -ne "0" ]; then
+    echo "curl does not exist. I will install it for you..."
+    apt-get install curl
+fi
+
+#curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.0/install.sh | bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh | bash
 
 source ~/.nvm/nvm.sh
 source ~/.profile
@@ -19,13 +44,24 @@ nvm install $NODE_VERSION
 nvm use $NODE_VERSION
 nvm alias default $NODE_VERSION
 
+npm install -g npm
 npm install forever -g
 
-wget https://github.com/wekan/wekan/releases/download/v0.9/wekan-v0.9.0.tar.gz
+cd
+wget https://github.com/wekan/wekan/releases/download/v0.10.1/wekan-0.10.1.tar.gz
 rm -rf ~/bundle
-tar xzvf wekan-v0.9.0.tar.gz
+tar xzvf wekan-0.10.1.tar.gz
 
 cd bundle/programs/server && npm install
+
+echo ""
+echo "Installing wekan service..."
+echo -ne '#####                     (33%)\r'
+sleep 1
+echo -ne '#############             (66%)\r'
+sleep 1
+echo -ne '#######################   (100%)\r'
+echo -ne '\n'
 
 # Cat text, but keep $ uninterpreted
 cat > /etc/init.d/wekan <<'_EOF'
@@ -57,6 +93,7 @@ export PATH=$PATH:$NODE_PATH:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/
 export MONGO_URL="mongodb://127.0.0.1:27017/wekan"
 export ROOT_URL="http://127.0.0.1"
 export PORT="8080"
+export MAIL_URL='smtp://user:pass@mailserver.examples.com:25/'
 
 NAME="Wekan"
 APPLICATION_DIRECTORY=/root/bundle
@@ -121,6 +158,47 @@ _EOF
 chmod +x /etc/init.d/wekan
 update-rc.d -f wekan remove
 update-rc.d wekan defaults
+
+echo ""
+echo "Installing custom scripts..."
+
+# First step
+cp /etc/issue /etc/issue-standard
+echo -ne '#####                     (33%)\r'
+sleep 1
+# Second step
+cat > /usr/local/bin/get-ip-address <<'_EOF'
+#!/bin/bash
+/sbin/ifconfig | grep "inet addr" | grep -v "127.0.0.1" | awk '{ print $2 }' | awk -F: '{ print $2 }'
+
+_EOF
+chmod +x /usr/local/bin/get-ip-address
+echo -ne '#############             (66%)\r'
+sleep 1
+# Third step
+cat > /etc/network/if-up.d/show-ip-address <<'_EOF'
+#!/bin/bash
+if [ "$METHOD" = loopback ]; then
+    exit
+fi
+
+# Only run from ifup
+if [ "$MODE" != start ]; then
+    exit 0
+fi
+
+cp /etc/issue-standard /etc/issue
+#IP="`ip route get 8.8.8.8 | awk '{ $NF; exit; }'`"
+IP="IP ADDRESS: `/usr/local/bin/get-ip-address` (default port 8080)"
+echo -e "\e[33m$IP \e[39m " >> /etc/issue
+echo "" >> /etc/issue
+
+_EOF
+chmod +x /etc/network/if-up.d/show-ip-address
+echo -ne '#######################   (100%)\r'
+sleep 1
+echo -ne '\n'
+
 
 echo ""
 echo "Installation completed."

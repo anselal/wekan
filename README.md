@@ -1,9 +1,9 @@
 # wekan
 Wekan auto-installation script
 
-Tested on Ubuntu Server 14.04.3 LTS but it should work on any Debian based distribution.
+Tested on Ubuntu Server 14.04.4 LTS but it should work on any Debian based distribution.
 
-This scripts automates the installation process for **[Wekan v0.9.0](https://github.com/wekan/wekan/releases/tag/v0.9)**
+This scripts automates the installation process for **[Wekan v0.10.1](https://github.com/wekan/wekan/releases/tag/v0.10.1)**
 
 It automatically downloads and installs the following packages:
 
@@ -11,15 +11,16 @@ It automatically downloads and installs the following packages:
 * mongodb-server (NoSQL database)
 * nvm (installs NodeJS v0.10.40)
 * forever (runs NodeJS applications at the background forever)
-* wekan v0.9.0
+* wekan v0.10.1
 
 ## Pre-Configuration
 Before you start the installation, you can edit the script to change some parameters, such as:
 
-* *NODE_VERSION* (default is v0.10.40 which is required for running Wekan v0.9.0. I suggest **NOT CHANGING IT** since it could break the service)
+* *NODE_VERSION* (default is v0.10.40 which is required for running Wekan v0.10.1. I suggest **NOT CHANGING IT** since it could break the service)
 * *MONGO_URL* (default is mongodb://127.0.0.1:27017/wekan)
 * *ROOT_URL* (default is http://127.0.0.1)
 * *PORT* (defaults is set to **8080**)
+* *MAIL_URL* (the format is 'smtp://user:pass@mailserver.examples.com:25/')
 * *PIDFILE* (default is /var/run/Wekan.pid)
 * *LOGFILE* (default is /var/run/Wekan.log)
 
@@ -75,7 +76,7 @@ For the changes to take effect you should **restart the service**. I recommend *
 
 ## Wekan Virtual Appliance
 
-I have prepared a ready to run, Ubuntu based (Ubuntu 14.04.3 Server - amd64) Virtual Machine with [Wekan](https://github.com/wekan/wekan) preinstalled. All you need is a VirtualBox installation. You can download the appliance from https://selalmaz.xyz/t/wekanvm (~678MB)
+I have prepared a ready to run, Ubuntu based (Ubuntu 14.04.4 Server - amd64) Virtual Machine with [Wekan](https://github.com/wekan/wekan) preinstalled. All you need is a VirtualBox installation. You can download the appliance directly from https://selalmaz.xyz/t/wekanmv-0-10-1 (~689MB) or from the releases page at https://github.com/anselal/wekan/releases
 
 * username: wekan
 * password: wekan
