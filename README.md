@@ -37,9 +37,6 @@ As a plus, the script configures Wekan as a service which autostarts at boot.
 
 After the installation is complete, you have the option to start the service or to reboot the system.
 
->In case the script fails fetching **nvm** using **wget**, you can edit the file and
-- comment out line 5, which is the **wget** command for fetching nvm
-- uncomment line 7, which uses **curl** to fetch **nvm**
 
 ## Service
 You can manually start the service as root by typing:
