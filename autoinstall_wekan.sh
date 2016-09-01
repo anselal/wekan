@@ -102,9 +102,15 @@ PIDFILE=/var/run/$NAME.pid
 LOGFILE=/var/run/$NAME.log
 FOREVER=$(which forever)
 
+f_proc="$NODE_PATH/forever list | grep Wekan | cut -d'[' -f2 | cut -d']' -f1"
+
 start() {
-	echo "Starting $NAME"
-	$NODE_PATH/forever --pidFile $PIDFILE --sourceDir=$APPLICATION_DIRECTORY -a -l $LOGFILE --minUptime 5000 --spinSleepTime 2000 start $APPLICATION_START &
+	if [ -f $PIDFILE -o `bash -c "$f_proc" | wc -l` -gt 0 ]; then
+		echo "$NAME is already running"
+	else
+		echo "Starting $NAME"
+		$NODE_PATH/forever --pidFile $PIDFILE --sourceDir=$APPLICATION_DIRECTORY -a -l $LOGFILE --minUptime 5000 --spinSleepTime 2000 start $APPLICATION_START &
+	fi
 	RETVAL=$?
 
 }
@@ -112,12 +118,17 @@ start() {
 stop() {
 	if [ -f $PIDFILE ]; then
 		echo "Shutting down $NAME"
-		rm -f $PIDFILE
-		RETVAL=$?
-	else
-		echo "$NAME is not running."
-		RETVAL=0
+		cat $PIDFILE | xargs $NODE_PATH/forever stop
+	elif [ ! -f $PIDFILE ]; then
+		# Check if a wekan process is still running through forever
+		if [[ `bash -c "$f_proc" | wc -l` -gt 0 ]]; then
+			echo "Shutting down $NAME"
+			$NODE_PATH/forever stopall
+		else
+			echo "$NAME is not running"
+		fi
 	fi
+	RETVAL=$?
 }
 
 restart() {
