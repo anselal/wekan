@@ -16,8 +16,6 @@ elif [ $? -ne "0" ]; then
 	apt-get update && apt-get install -y mongodb-server make g++ gcc build-essential libssl-dev
 fi
 
-aptitude update && aptitude install -y mongodb-server make g++ gcc build-essential libssl-dev
-
 # wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.30.0/install.sh | bash
 
 # Check if curl exists
