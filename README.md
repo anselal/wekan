@@ -1,3 +1,5 @@
+# This repo has moved to https://github.com/wekan/wekan-autoinstall
+
 # wekan
 Wekan auto-installation script
 
