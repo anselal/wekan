@@ -23,7 +23,6 @@ which curl > /dev/null
 # If curl does not exist, install it
 if [ $? -ne "0" ]; then
     echo "curl does not exist. I will install it for you..."
-    apt-get install curl
 fi
 
 #curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.0/install.sh | bash
